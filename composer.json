@@ -1,0 +1,21 @@
+{
+    "name": "iit/yii2-i18n-mongodb",
+    "description": "Yii2使用mongodb作为翻译数据源",
+    "type": "yii2-extension",
+    "version": "1.0.0",
+    "license": "MIT",
+    "authors": [
+        {
+            "name": "ilovintit",
+            "email": "ilovintit@gmail.com"
+        }
+    ],
+    "require": {
+        "yiisoft/yii2": "*"
+    },
+    "autoload": {
+        "psr-4": {
+            "iit\\i18n\\": ""
+        }
+    }
+}
