@@ -109,7 +109,8 @@ class MongoDbMessageSource extends MessageSource
      */
     protected function loadMessagesFromDb($category, $language)
     {
-        $mainQuery = (new Query())->select('message', 'translation')
+        $mainQuery = (new Query())->select(['message', 'translation'])
+            ->from($this->messageCollection)
             ->where(['category' => $category, 'language' => $language]);
 
         $fallbackLanguage = substr($language, 0, 2);
@@ -118,7 +119,7 @@ class MongoDbMessageSource extends MessageSource
         }
 
         $messages = $mainQuery->all($this->db);
-
+        
         return ArrayHelper::map($messages, 'message', 'translation');
     }
 } 
