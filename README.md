@@ -25,3 +25,12 @@
 ],
 
 ```
+
+##辅助类
+本扩展自带插入翻译信息方法，当需要插入翻译信息到数据库我们可以调用下列代码
+
+```php
+
+\iit\i18n\MessageManager::setTranslation('categroy', 'sourceMessage', 'translationMessage', 'language');
+
+```
