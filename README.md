@@ -1,4 +1,4 @@
-基本monogodb开发的Yii国际化数据源
+基于monogodb开发的Yii国际化数据源
 =================================
 ##安装方法
 在项目的`composer.json`的`require`数组内加入`"iit/yii2-i18n-mongodb": "*"`
