@@ -3,6 +3,7 @@
     "description": "Yii2使用mongodb作为翻译数据源",
     "type": "yii2-extension",
     "version": "1.0.0",
+    "minimum-stability": "dev",
     "license": "MIT",
     "authors": [
         {
