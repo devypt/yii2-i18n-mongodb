@@ -2,6 +2,7 @@ Yii2 I18N Mongodb
 =================================
 
 This packages is based on "iit/yii2-i18n-mongodb" package
+
 Installation
 `composer.json require "devypt/yii2-i18n-mongodb": "*"`
 
