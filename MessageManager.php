@@ -1,13 +1,12 @@
 <?php
 /**
  * Created by PhpStorm.
- * User: 俊杰
- * Date: 2014/11/4
- * Time: 11:26
+ * User: devypt
+ * Date: 2015/10/31
+ * Time: 10:12
  */
 
-namespace iit\i18n;
-
+namespace devypt\i18n;
 
 class MessageManager
 {
@@ -19,4 +18,4 @@ class MessageManager
         return $collection->update(['category' => $category, 'message' => $message, 'language' => $language], ['translation' => $translation], ['upsert' => true]) === 1 ?: false;
     }
 
-} 
+}

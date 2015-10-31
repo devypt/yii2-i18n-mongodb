@@ -6,7 +6,7 @@
  * Time: 8:38
  */
 
-namespace iit\i18n;
+namespace devypt\i18n;
 
 
 use yii\base\InvalidConfigException;
@@ -119,7 +119,7 @@ class MongoDbMessageSource extends MessageSource
         }
 
         $messages = $mainQuery->all($this->db);
-        
+
         return ArrayHelper::map($messages, 'message', 'translation');
     }
-} 
+}
