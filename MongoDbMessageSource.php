@@ -1,7 +1,6 @@
 <?php
 /**
  * Created by PhpStorm.
- * User: 俊杰
  * Date: 2014/11/4
  * Time: 8:38
  */
@@ -14,6 +13,7 @@ use yii\caching\Cache;
 use yii\di\Instance;
 use yii\helpers\ArrayHelper;
 use yii\i18n\MessageSource;
+use yii\i18n\MissingTranslationEvent;
 use yii\mongodb\Connection;
 use yii\mongodb\Query;
 
@@ -121,5 +121,19 @@ class MongoDbMessageSource extends MessageSource
         $messages = $mainQuery->all($this->db);
 
         return ArrayHelper::map($messages, 'message', 'translation');
+    }
+
+    public static function handleMissingTranslation(MissingTranslationEvent $event)
+    {
+        $event->translatedMessage = $event->message;
+        $collection = \Yii::$app->mongodb->getCollection('customer');
+        $collection->insert([
+            'category'=>$event->category,
+            'language'=>$event->language,
+            'message'=>$event->message,
+        ]);
+
+
+
     }
 }
