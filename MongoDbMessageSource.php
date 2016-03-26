@@ -42,7 +42,7 @@ class MongoDbMessageSource extends MessageSource
     /**
      * @var string the name of the translated message table.
      */
-    public $messageCollection = 'message_translation';
+    public $messageCollection = 'message';
     /**
      * @var integer the time in seconds that the messages can remain valid in cache.
      * Use 0 to indicate that the cached data will never expire.
@@ -113,12 +113,14 @@ class MongoDbMessageSource extends MessageSource
             ->from($this->messageCollection)
             ->where(['category' => $category, 'language' => $language]);
 
+
         $fallbackLanguage = substr($language, 0, 2);
         if ($fallbackLanguage != $language) {
             $mainQuery->orWhere(['category' => $category, 'language' => $fallbackLanguage]);
         }
 
         $messages = $mainQuery->all($this->db);
+
 
         return ArrayHelper::map($messages, 'message', 'translation');
     }

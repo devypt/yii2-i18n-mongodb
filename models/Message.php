@@ -1,8 +1,8 @@
 <?php
 
-namespace devypt\i18n;
+namespace devypt\i18n\models;
 
-use yii;
+use Yii;
 
 /**
  * This is the model class for collection "message".
