@@ -7,7 +7,6 @@
 
 namespace devypt\i18n;
 
-
 use yii\base\InvalidConfigException;
 use yii\caching\Cache;
 use yii\di\Instance;
@@ -54,11 +53,11 @@ class MongoDbMessageSource extends MessageSource
      */
     public $enableCaching = false;
 
-
     /**
      * Initializes the DbMessageSource component.
      * This method will initialize the [[db]] property to make sure it refers to a valid DB connection.
      * Configured [[cache]] component would also be initialized.
+     *
      * @throws InvalidConfigException if [[db]] is invalid or [[cache]] is invalid.
      */
     public function init()
@@ -77,16 +76,17 @@ class MongoDbMessageSource extends MessageSource
      *
      * @param string $category the message category
      * @param string $language the target language
+     *
      * @return array the loaded messages. The keys are original messages, and the values
      * are translated messages.
      */
     protected function loadMessages($category, $language)
     {
         if ($this->enableCaching) {
-            $key = [
-                __CLASS__,
-                $category,
-                $language,
+            $key      = [
+              __CLASS__,
+              $category,
+              $language,
             ];
             $messages = $this->cache->get($key);
             if ($messages === false) {
@@ -103,16 +103,17 @@ class MongoDbMessageSource extends MessageSource
     /**
      * Loads the messages from database.
      * You may override this method to customize the message storage in the database.
+     *
      * @param string $category the message category.
      * @param string $language the target language.
+     *
      * @return array the messages loaded from database.
      */
     protected function loadMessagesFromDb($category, $language)
     {
         $mainQuery = (new Query())->select(['message', 'translation'])
-            ->from($this->messageCollection)
-            ->where(['category' => $category, 'language' => $language]);
-
+                                  ->from($this->messageCollection)
+                                  ->where(['category' => $category, 'language' => $language]);
 
         $fallbackLanguage = substr($language, 0, 2);
         if ($fallbackLanguage != $language) {
@@ -121,7 +122,6 @@ class MongoDbMessageSource extends MessageSource
 
         $messages = $mainQuery->all($this->db);
 
-
         return ArrayHelper::map($messages, 'message', 'translation');
     }
 
@@ -129,14 +129,14 @@ class MongoDbMessageSource extends MessageSource
     {
 
         $event->translatedMessage = $event->message;
-        $collection = \Yii::$app->mongodb->getCollection('message');
-        $collection->insert([
-            'category'=>$event->category,
-            'language'=>$event->language,
-            'message'=>$event->message,
-        ]);
-
-
-
+        $collection               = \Yii::$app->mongodb->getCollection('message');
+        $collection->insert(
+          [
+            'category'    => $event->category,
+            'language'    => $event->language,
+            'message'     => $event->message,
+            'translation' => $event->message,
+          ]
+        );
     }
 }
