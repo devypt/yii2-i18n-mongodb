@@ -127,8 +127,9 @@ class MongoDbMessageSource extends MessageSource
 
     public static function handleMissingTranslation(MissingTranslationEvent $event)
     {
+
         $event->translatedMessage = $event->message;
-        $collection = \Yii::$app->mongodb->getCollection('customer');
+        $collection = \Yii::$app->mongodb->getCollection('message');
         $collection->insert([
             'category'=>$event->category,
             'language'=>$event->language,
