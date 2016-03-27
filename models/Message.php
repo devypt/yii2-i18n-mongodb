@@ -25,11 +25,11 @@ class Message extends \yii\mongodb\ActiveRecord
     public function attributes()
     {
         return [
-            '_id',
-            'message',
-            'category',
-            'language',
-            'translation'
+          '_id',
+          'message',
+          'category',
+          'language',
+          'translation',
         ];
     }
 
@@ -39,6 +39,7 @@ class Message extends \yii\mongodb\ActiveRecord
     public function rules()
     {
         return [
+          [['translation', 'language', 'category', 'message'], 'safe'],
 
         ];
     }
@@ -49,7 +50,7 @@ class Message extends \yii\mongodb\ActiveRecord
     public function attributeLabels()
     {
         return [
-            '_id' => 'ID',
+          '_id' => 'ID',
         ];
     }
 }
